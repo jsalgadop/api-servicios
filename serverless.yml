@@ -1,0 +1,52 @@
+org: utec2025
+service: api-servicios
+
+provider:
+  name: aws
+  runtime: python3.13
+  memorySize: 1024
+  timeout: 20
+  iam:
+    role: arn:aws:iam::471112641796:role/LabRole
+
+functions:
+  listar:
+    handler: ListarServicios.lambda_handler
+    events:
+      - http:
+          path: /servicios/listar
+          method: get
+          cors: true
+          integration: lambda
+  buscar:
+    handler: BuscarServicio.lambda_handler
+    events:
+      - http:
+          path: /servicios/buscar
+          method: post
+          cors: true
+          integration: lambda
+  crear:
+    handler: CrearServicio.lambda_handler
+    events:
+      - http:
+          path: /servicios/crear
+          method: post
+          cors: true
+          integration: lambda
+  modificar:
+    handler: ModificarServicio.lambda_handler
+    events:
+      - http:
+          path: /servicios/modificar
+          method: put
+          cors: true
+          integration: lambda
+  eliminar:
+    handler: EliminarServicio.lambda_handler
+    events:
+      - http:
+          path: /servicios/eliminar
+          method: delete
+          cors: true
+          integration: lambda
